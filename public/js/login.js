@@ -16,8 +16,7 @@ loginForm.addEventListener('submit', async (e) => {
     if (response.ok) {
       location.assign('/');
     } else if (response.status === 401) {
-      alert('Неверная почта или пароль');
-      setTimeout();
+      alert('Неверные логин или пароль');
     }
   } catch (error) {
     console.error('Ошибка:', error);

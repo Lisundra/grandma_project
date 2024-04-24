@@ -15,13 +15,19 @@ loginRouter.post('/', async (req, res) => {
     const { login, password } = req.body;
     const parentUser = await Parent.findOne({ where: { login } });
     const childrenUser = await Child.findOne({ where: { login } });
-    if (!parentUser || !childrenUser) {
-      console.log('-_____________-');
+
+    if (!parentUser && !childrenUser) {
       res.redirect('/register');
     } else {
-      const user = parentUser || childrenUser;
+      let user;
+      if (parentUser) {
+        user = parentUser;
+      } else {
+        user = childrenUser;
+      }
+
       const checkPass = await bcrypt.compare(password, user.password);
-      console.log(user, '++++++++++++++++++++');
+
       if (checkPass) {
         req.session.login = user.login;
         req.session.userId = user.id;
@@ -34,6 +40,7 @@ loginRouter.post('/', async (req, res) => {
     }
   } catch (error) {
     console.log(`loginRouter => ${error}`);
+    res.status(500).send('Ошибка сервера');
   }
 });
 

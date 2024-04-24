@@ -13,7 +13,6 @@ regRouter.get('/', (req, res) => {
 regRouter.post('/', async (req, res) => {
   try {
     const { login, password, role } = req.body;
-    console.log(login, password, role);
     const parentUser = await Parent.findOne({ where: { login } });
     const childrenUser = await Child.findOne({ where: { login } });
 
