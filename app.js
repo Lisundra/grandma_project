@@ -6,7 +6,7 @@ const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
-const { secureRoute, checkUser } = require('./middlewares/common');
+const { secureRoute, checkUser } = require('./src/middlewares/common');
 
 const app = express();
 
