@@ -1,23 +1,22 @@
-const { Router } = require('express');
+const homeRouter = require('express').Router();
 const renderTemplate = require('../utils/renderTemplate');
 const Home = require('../views/pages/Home');
 
-const homeRouter = new Router();
-
-// homeRouter.get('/', (req, res) => {
-//   renderTemplate(Home, {}, res);
-// });
-
 homeRouter.get('/', (req, res) => {
-  // const { login } = req.app.locals.user;
-  // console.log(login);
-  console.log(req.session, '-------------');
-  if (req.session) {
+  try {
     const { login } = req.session;
     renderTemplate(Home, { login }, res);
-  } else {
-    renderTemplate(Home, {}, res);
+  } catch (err) {
+    console.error('Ошибка при получении данных:', err);
+    res.status(500).send('Ошибка на сервере');
   }
+});
+
+homeRouter.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('cookieName');
+    res.redirect('/');
+  });
 });
 
 module.exports = homeRouter;
