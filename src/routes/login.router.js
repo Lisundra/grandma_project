@@ -4,7 +4,7 @@ const renderTemplate = require('../utils/renderTemplate');
 
 const Login = require('../views/Login');
 
-const { Parent, Children } = require('../../db/models');
+// const { Parent, Children } = require('../../db/models');
 
 loginRouter.get('/', (req, res) => {
   renderTemplate(Login, null, res);

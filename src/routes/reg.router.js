@@ -4,7 +4,7 @@ const renderTemplate = require('../utils/renderTemplate');
 
 const Register = require('../views/Register');
 
-const { Parent, Children } = require('../../db/models');
+// const { Parent, Children } = require('../../db/models');
 
 regRouter.get('/', (req, res) => {
   renderTemplate(Register, null, res);
