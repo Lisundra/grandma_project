@@ -1,0 +1,90 @@
+body {
+    font-family: "Noto Sans", sans-serif;
+    /* background-image: url(/assets/beans.jpg); */
+}
+
+button.navbar-toggler {
+    position: fixed;
+    right: 0;
+    margin: 10px;
+  }
+  
+  nav.navbar.navbar-expand-lg.bg-light{
+   height: 80px;
+  }
+
+  nav.navbar.navbar-expand-lg.bg-light{
+    position: fixed;
+    z-index: 1;
+    width: 100vw;
+    top: 0;
+    background-color: rgb(255, 236, 199) !important;
+  }
+
+  .navbar .nav-link {
+    color: #8B4513;
+    font-size: 18px;
+  }
+  
+
+  .navbar .nav-link:hover,
+  .navbar .nav-link:focus {
+    color: #df906b;
+  }
+
+
+  .authorizeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+  }
+
+  .formAuthorize {
+    text-align: ;
+  }
+  
+  
+  form {
+    max-width: 300px;
+    margin: 22px;
+    display: flex;
+    flex-direction: column;
+    input {
+      margin-bottom: 12px;
+    }
+    button {
+      margin-top: 16px;
+    }
+  }
+  
+  header {
+    margin-bottom: 12px;
+  }
+  
+  h1,h2,h3,h4,h5 {
+    margin-left: 22px;
+    margin-right: 22px;
+    text-align: center;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 50px;
+    letter-spacing: 5px;
+  }
+
+  h3 {
+    font-weight: 200;
+    letter-spacing: 4px;
+    color: #482309; 
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+
+
+
+
+
