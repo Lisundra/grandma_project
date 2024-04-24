@@ -27,6 +27,7 @@ regRouter.post('/', async (req, res) => {
       });
       req.session.login = newUser.login;
       req.session.userId = newUser.id;
+      req.session.role = newUser.role;
 
       req.session.save(() => {
         res.json({
@@ -42,6 +43,7 @@ regRouter.post('/', async (req, res) => {
       });
       req.session.login = newUser.login;
       req.session.userId = newUser.id;
+      req.session.role = newUser.role;
 
       req.session.save(() => {
         res.json({
