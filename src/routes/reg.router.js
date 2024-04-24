@@ -2,9 +2,9 @@ const regRouter = require('express').Router();
 const bcrypt = require('bcrypt');
 const renderTemplate = require('../utils/renderTemplate');
 
-const Register = require('../views/Register');
+const Register = require('../views/pages/Register');
 
-// const { Parent, Children } = require('../../db/models');
+const { Parent, Child } = require('../../db/models');
 
 regRouter.get('/', (req, res) => {
   renderTemplate(Register, null, res);
@@ -13,8 +13,9 @@ regRouter.get('/', (req, res) => {
 regRouter.post('/', async (req, res) => {
   try {
     const { login, password, role } = req.body;
+    console.log(login, password, role);
     const parentUser = await Parent.findOne({ where: { login } });
-    const childrenUser = await Children.findOne({ where: { login } });
+    const childrenUser = await Child.findOne({ where: { login } });
 
     if (parentUser || childrenUser) {
       res.json({ err: 'Пользователь с таким логином уже существует' });
@@ -35,7 +36,7 @@ regRouter.post('/', async (req, res) => {
       });
     } else {
       const hash = await bcrypt.hash(password, 10);
-      const newUser = await Children.create({
+      const newUser = await Child.create({
         login,
         password: hash,
         role,
@@ -50,7 +51,7 @@ regRouter.post('/', async (req, res) => {
       });
     }
   } catch (error) {
-    res.json({ err: error });
+    res.json({ err: error.message });
     console.log('ОШИБКА НА ЭТАПЕ РЕГИСТРАЦИИ>>>>', error);
   }
 });
