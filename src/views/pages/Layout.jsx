@@ -1,7 +1,7 @@
 const React = require('react');
 const Navbar = require('../components/Navbar');
 
-function Layout({ children, login }) {
+function Layout({ children, login, role }) {
   return (
     <html lang="ru">
       <head>
@@ -17,7 +17,7 @@ function Layout({ children, login }) {
         <title>Бабушкин помощник</title>
       </head>
       <body>
-        <Navbar login={login} />
+        <Navbar login={login} role={role} />
         <div className="container">{children}</div>
         <script
           defer

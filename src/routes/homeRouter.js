@@ -4,8 +4,8 @@ const Home = require('../views/pages/Home');
 
 homeRouter.get('/', (req, res) => {
   try {
-    const { login } = req.session;
-    renderTemplate(Home, { login }, res);
+    const { login, role } = req.session;
+    renderTemplate(Home, { login, role }, res);
   } catch (err) {
     console.error('Ошибка при получении данных:', err);
     res.status(500).send('Ошибка на сервере');
