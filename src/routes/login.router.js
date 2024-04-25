@@ -31,6 +31,7 @@ loginRouter.post('/', async (req, res) => {
       if (checkPass) {
         req.session.login = user.login;
         req.session.userId = user.id;
+        req.session.role = user.role;
         req.session.save(() => {
           res.redirect('/');
         });
@@ -39,7 +40,7 @@ loginRouter.post('/', async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(`loginRouter => ${error}`);
+    console.error(`loginRouter => ${error}`);
     res.status(500).send('Ошибка сервера');
   }
 });

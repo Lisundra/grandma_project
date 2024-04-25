@@ -1,17 +1,19 @@
 const React = require('react');
 const Layout = require('./Layout');
-// const Card = require('../components/Card');
+const Card = require('../components/Card');
 
-function Home({ login }) {
+function Home({ entries, login, role }) {
+  // console.log(entries);
   return (
-    <Layout login={login}>
-      <div className="mainContainer">
+    <Layout login={login} role={role}>
+      <div className="main-container">
         <h1>Блог для бабушек и внуков</h1>
         {login ? (
           <>
             <h2>
               Добро пожаловать,
-              {login}!
+              {login}
+              !
             </h2>
             <h3>Инструкция:</h3>
             <p>
@@ -22,12 +24,8 @@ function Home({ login }) {
               Чтобы поделиться вашей публикацией нужно перейти в раздел
               "Загрузить картинку"
             </p>
-            <div className="upload-btn">
-              <form
-                action="/upload"
-                method="post"
-                encType="multipart/form-data"
-              >
+            <div className="upload-form-container">
+              <form className="upload-form">
                 <label htmlFor="imageUpload">ЗАГРУЗИТЬ КАРТИНКУ</label>
                 <input
                   id="imageUpload"
@@ -35,20 +33,21 @@ function Home({ login }) {
                   type="file"
                   accept="image/*"
                 />
-                <button type="submit">Отправить</button>
+                <button className="upload-btn" type="button">Отправить</button>
               </form>
             </div>
-
-            {/* <div className='cardsContainer'>
-          {cards?.map(event => (
-            <Card key={card.id} card={card} login={login} />
-          ))}
-        </div> */}
+            <div className="cards-container">
+              {entries.map((entry) => (
+                <Card key={entry.id} entry={entry} login={login} />
+              ))}
+            </div>
           </>
         ) : (
           <h2>Авторизуйтесь, чтобы смотреть и добавлять картинки</h2>
         )}
       </div>
+      <script defer src="/js/uploadSuccess.js" />
+      <script defer src="/js/sound.js" />
     </Layout>
   );
 }

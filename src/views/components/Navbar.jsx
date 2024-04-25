@@ -1,22 +1,16 @@
 const React = require('react');
 
-function Navbar({ login }) {
+function Navbar({ login, role }) {
   return (
     <nav className="navbar">
       <div className="navbarContainer">
         {login ? (
           <div className="collapse navbar-collapse" id="navbarNav">
-            {login.role === 'parent' && (
-              <a className="nav" href="#">
-                <span>Загрузить картинку</span>
-              </a>
-            )}
-            {login.role === 'child' && (
-              <a className="nav" href="#">
+            {role === 'child' && (
+              <a className="nav" href="grandmaCards">
                 <span>Загруженные бабушкой</span>
               </a>
             )}
-
             <div className="nav">{login}</div>
             <ul className="navbar-nav">
               <li className="nav-item">
@@ -58,3 +52,4 @@ function Navbar({ login }) {
 }
 
 module.exports = Navbar;
+

@@ -16,9 +16,17 @@ regRouter.post('/', async (req, res) => {
     const childrenUser = await Child.findOne({ where: { login } });
 
     if (parentUser || childrenUser) {
-      return res.json({ err: 'Пользователь с таким логином уже существует' });
-    }
-
+      res.json({ err: 'Пользователь с таким логином уже существует' });
+    } else if (role === 'parent') {
+      const hash = await bcrypt.hash(password, 10);
+      const newUser = await Parent.create({
+        login,
+        password: hash,
+        role,
+      });
+      req.session.login = newUser.login;
+      req.session.userId = newUser.id;
+      req.session.role = newUser.role;
     let newUser;
     if (grandmother) {
       const grandUser = await Parent.findOne({
@@ -47,9 +55,9 @@ regRouter.post('/', async (req, res) => {
         password: hash,
         role,
       });
-    }
-    req.session.login = newUser.login;
-    req.session.userId = newUser.id;
+      req.session.login = newUser.login;
+      req.session.userId = newUser.id;
+      req.session.role = newUser.role;
 
     req.session.save(() => {
       res.json({
@@ -58,7 +66,7 @@ regRouter.post('/', async (req, res) => {
     });
   } catch (error) {
     res.json({ err: error.message });
-    console.log('ОШИБКА НА ЭТАПЕ РЕГИСТРАЦИИ>>>>', error);
+    console.error('ОШИБКА НА ЭТАПЕ РЕГИСТРАЦИИ>>>>', error);
   }
 });
 

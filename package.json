@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "remigrate": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "remigrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
     "dev": "nodemon src/app.js --ignore sessions --ext js,jsx",
     "start": "node app.js"
   },

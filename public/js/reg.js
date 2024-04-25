@@ -22,11 +22,12 @@ form.addEventListener('submit', async (e) => {
         }, 200);
       }
       if (result.err) {
+        console.error(result.err);
         const errMsg = document.querySelector('.regErrMsg');
         errMsg.innerText = result.err;
       }
     } catch (error) {
-      console.log('Ошибка регистрации', error);
+      console.error('Ошибка регистрации', error);
       alert('Ошибка регистрации');
     }
   }

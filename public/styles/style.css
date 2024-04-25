@@ -142,6 +142,16 @@ button {
   }
   
 
+  .card-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .owner{
+    width: 200px; 
+  }
+  
+
 
  button::before {
     content: '';
