@@ -1,16 +1,19 @@
 const React = require('react');
 const Layout = require('./Layout');
-// const Card = require('../components/Card');
+const Card = require('../components/Card');
 
-function Home({ login, role }) {
+function Home({ entries, login, role }) {
+  // console.log(entries);
   return (
     <Layout login={login} role={role}>
-      <div className="mainContainer">
+      <div className="main-container">
         <h1>Блог для бабушек и внуков</h1>
         {login ? (
           <>
             <h2>
-              Добро пожаловать, {login}!
+              Добро пожаловать,
+              {login}
+              !
             </h2>
             <h3>Инструкция:</h3>
             <p>
@@ -33,18 +36,18 @@ function Home({ login, role }) {
                 <button className="upload-btn" type="button">Отправить</button>
               </form>
             </div>
-
-            {/* <div className='cardsContainer'>
-          {cards?.map(event => (
-            <Card key={card.id} card={card} login={login} />
-          ))}
-        </div> */}
+            <div className="cards-container">
+              {entries.map((entry) => (
+                <Card key={entry.id} entry={entry} login={login} />
+              ))}
+            </div>
           </>
         ) : (
           <h2>Авторизуйтесь, чтобы смотреть и добавлять картинки</h2>
         )}
       </div>
-      <script defer src="/js/uploadSuccess.js"></script>
+      <script defer src="/js/uploadSuccess.js" />
+      <script defer src="/js/sound.js" />
     </Layout>
   );
 }

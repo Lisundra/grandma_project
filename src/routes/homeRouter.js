@@ -4,16 +4,6 @@ const Home = require('../views/pages/Home');
 const GrandmaCards = require('../views/pages/GrandmaCards');
 const { Child, Content, Parent } = require('../../db/models');
 
-homeRouter.get('/', (req, res) => {
-  try {
-    const { login, role } = req.session;
-    renderTemplate(Home, { login, role }, res);
-  } catch (err) {
-    console.error('Ошибка при получении данных:', err);
-    res.status(500).send('Ошибка на сервере');
-  }
-});
-
 homeRouter.get('/grandmaCards', async (req, res) => {
   try {
     const { login, role } = req.session;
@@ -48,6 +38,20 @@ homeRouter.get('/logout', (req, res) => {
     res.clearCookie('cookieName');
     res.redirect('/');
   });
+});
+
+homeRouter.get('/', async (req, res) => {
+  try {
+    // console.log('+++++++++++++++ мы в этой ручке +++++++++++++++');
+    const { login, role } = req.session;
+    const metaEntries = await Content.findAll({
+      order: [['id', 'DESC']],
+    });
+    const entries = metaEntries.map((entry) => entry.get({ plain: true }));
+    renderTemplate(Home, { entries, login, role }, res);
+  } catch (err) {
+    console.error('Error on homeRouter.get() ====>>>>', err);
+  }
 });
 
 module.exports = homeRouter;
