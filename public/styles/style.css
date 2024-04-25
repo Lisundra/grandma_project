@@ -83,6 +83,16 @@ button.navbar-toggler {
     text-decoration: none;
   }
 
+  .card-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .owner{
+    width: 200px; 
+  }
+  
+
 
 
 

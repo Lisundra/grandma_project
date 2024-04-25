@@ -23,7 +23,7 @@ function Navbar({ login, role }) {
             <ul className="navbar-nav">
               {role === 'child' && (
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <a className="nav-link" href="/grandmaCards">
                     Загруженные бабушкой
                   </a>
                 </li>
