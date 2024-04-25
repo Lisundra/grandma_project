@@ -16,48 +16,37 @@ regRouter.post('/', async (req, res) => {
     const childrenUser = await Child.findOne({ where: { login } });
 
     if (parentUser || childrenUser) {
-      res.json({ err: 'Пользователь с таким логином уже существует' });
-    } else if (role === 'parent') {
+      return res.json({ err: 'Пользователь с таким логином уже существует' });
+    }
+
+    let newUser;
+    if (grandmother) {
+      const grandUser = await Parent.findOne({ where: { login: grandmother } });
+      if (!grandUser) {
+        return res.json({ err: 'Твоей бабушки тут нет)' });
+      }
       const hash = await bcrypt.hash(password, 10);
-      const newUser = await Parent.create({
+      newUser = await Child.create({
         login,
         password: hash,
         role,
       });
-      req.session.login = newUser.login;
-      req.session.userId = newUser.id;
-      req.session.role = newUser.role;
-    let newUser;
-    if (grandmother) {
-      const grandUser = await Parent.findOne({
-        where: { login: grandmother },
+      await ParentChild.create({
+        parent_id: grandUser.id,
+        child_id: newUser.id,
       });
-      if (grandUser) {
-        const hash = await bcrypt.hash(password, 10);
-        newUser = await Child.create({
-          login,
-          password: hash,
-          role,
-        });
-        await ParentChild.create({
-          parent_id: grandUser.id,
-          child_id: newUser.id,
-        });
-      } else {
-        return res.json({ err: 'Твоей бабушки тут нет)' });
-      }
-    }
-
-    if (role === 'parent') {
+    } else if (role === 'parent') {
       const hash = await bcrypt.hash(password, 10);
       newUser = await Parent.create({
         login,
         password: hash,
         role,
       });
-      req.session.login = newUser.login;
-      req.session.userId = newUser.id;
-      req.session.role = newUser.role;
+    }
+
+    req.session.login = newUser.login;
+    req.session.userId = newUser.id;
+    req.session.role = newUser.role;
 
     req.session.save(() => {
       res.json({

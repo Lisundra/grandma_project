@@ -47,10 +47,11 @@ h2, h3 {
 
 p {
   color: rgb(125, 111, 86);
-  margin: 10px;
+  padding: 10px 10px 10px 10px;
   font-size: 55px;
   background-color: rgba(245, 245, 220, 0.7);
   border-radius: 20px;
+  margin: 5px;
 }
 
 .container {
@@ -67,6 +68,71 @@ p {
   justify-content: space-between;
   text-align: center;
 }
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  font-size: 45px;
+  background-color: rgba(245, 245, 220, 0.7);
+  border-radius: 20px;
+ 
+}
+
+.grandContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.childcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  font-size: 25px;
+  background-color: rgba(245, 245, 220, 0.7);
+  border-radius: 20px;
+  width: 300px;
+}
+
+.image-container {
+  padding: 15px;
+}
+
+.text-block {
+  padding: 25px;
+  color: rgb(125, 111, 86);
+  
+}
+.text-block:hover {
+  cursor: pointer;
+  color: rgb(87, 89, 80);
+}
+.text-block:hover::before {
+  transform: translate3d(-50%, -50%, 0) scale3d(15, 15, 15);
+}
+
+.owner {
+  color: rgb(125, 111, 86);
+}
+
 
 .navbar-nav {
   display: flex;
@@ -125,6 +191,23 @@ p {
                0 3px 3px hsl(143, 54%, 41%);
   }
 
+  .upload-form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 35px;
+    font-weight: 400;
+    color:  wheat;
+    font-style: normal;
+  
+    text-shadow: 0 2px 0 hsl(263, 59%, 53%),
+               0 3px 2px hsla(122, 64%, 49%, 0.5),
+               0 3px 3px hsl(143, 54%, 41%);
+  }
+
 button {
     z-index: 1;
     position: relative;
@@ -140,17 +223,6 @@ button {
     overflow: hidden;
     transition: color 0.4s ease-in-out;
   }
-  
-
-  .card-container {
-    display: flex;
-    margin-bottom: 20px;
-  }
-  
-  .owner{
-    width: 200px; 
-  }
-  
 
 
  button::before {
@@ -176,7 +248,46 @@ button:hover {
  button:hover::before {
     transform: translate3d(-50%, -50%, 0) scale3d(15, 15, 15);
   }
+  
+  .upload-form input[type="file"]::file-selector-button {
+    z-index: 1;
+    position: relative;
+    font-size: 25px;
+    font-family: inherit;
+    color:black;
+    margin-left: 10px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(125, 111, 86);
+    overflow: hidden;
+    transition: color 0.4s ease-in-out;
+  }
 
+  .upload-form input[type="file"]::file-selector-button::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: rgb(125, 111, 86);
+    transform-origin: center;
+    transform: translate3d(-50%, -50%, 0) scale3d(0, 0, 0);
+    transition: transform 0.45s ease-in-out;
+  }
+  
+
+  .upload-form input[type="file"]::file-selector-button:hover {
+    cursor: pointer;
+    color: wheat;
+  }
+  .upload-form input[type="file"]::file-selector-button:hover::before {
+    transform: translate3d(-50%, -50%, 0) scale3d(15, 15, 15);
+  }
   .regForm input {
     width: 92%;
     padding: 15px;
@@ -198,20 +309,33 @@ button:hover {
     background-color:wheat;
     border-radius: 10px;
   }
+
+  .upload-form input {
+    width: 92%;
+    padding: 15px;
+    color:black;
+    font-family: "Pacifico", cursive;
+    font-size: 20px;
+    border: none;
+    background-color:wheat;
+    border-radius: 10px;
+  }
+  
+
+
   .regForm select {
     width: 100%;
-    padding: 15px;
-    padding: 35px;
     color: black;
     font-family: "Pacifico", cursive;
+    padding-left: 35px;
     font-size: 35px;
     border: none;
     background-color:wheat;
     border-radius: 10px;
   }
 
- .inputGrandmother placeholder {
-    padding-left: 50px;
+  .inputGrandmother::placeholder {
+    text-indent: 30px;
   }
 
 .loginForm input:focus {
