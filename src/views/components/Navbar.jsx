@@ -1,7 +1,7 @@
 const React = require('react');
 
 function Navbar({ login }) {
-  console.log(login);
+  // console.log(login);
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
