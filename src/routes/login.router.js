@@ -40,7 +40,7 @@ loginRouter.post('/', async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(`loginRouter => ${error}`);
+    console.error(`loginRouter => ${error}`);
     res.status(500).send('Ошибка сервера');
   }
 });

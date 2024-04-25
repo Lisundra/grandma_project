@@ -53,7 +53,7 @@ regRouter.post('/', async (req, res) => {
     }
   } catch (error) {
     res.json({ err: error.message });
-    console.log('ОШИБКА НА ЭТАПЕ РЕГИСТРАЦИИ>>>>', error);
+    console.error('ОШИБКА НА ЭТАПЕ РЕГИСТРАЦИИ>>>>', error);
   }
 });
 
