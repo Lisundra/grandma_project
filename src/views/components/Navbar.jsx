@@ -2,53 +2,63 @@ const React = require('react');
 
 function Navbar({ login, role }) {
   return (
-    <nav className="navbar navbar-expand-lg bg-light">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="/">
-          Home
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
+    <nav className="navbar">
+      <div className="navbarContainer">
         {login ? (
           <div className="collapse navbar-collapse" id="navbarNav">
+            <div className="nav">{login}</div>
             <ul className="navbar-nav">
               {role === 'child' && (
-                <li className="nav-item">
-                  <a className="nav-link" href="/grandmaCards">
-                    Загруженные бабушкой
-                  </a>
-                </li>
+                <>
+                  <li className="nav-item">
+                    <a className="nav" href="/">
+                      <span>Дом</span>
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav" href="/grandmaCards">
+                      <span>Загруженные бабушкой</span>
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav" href="/logout">
+                      <span>Выйти</span>
+                    </a>
+                  </li>
+                </>
               )}
-              <li className="nav-item">
-                <div className="nav-link">{login}</div>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/logout">
-                  Выйти
-                </a>
-              </li>
+              {role !== 'child' && (
+                <>
+                  <li className="nav-item">
+                    <a className="nav" href="/">
+                      <span>Дом</span>
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav" href="/logout">
+                      <span>Выйти</span>
+                    </a>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         ) : (
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="/login">
-                  Вход
+                <a className="nav" href="/">
+                  <span>Дом</span>
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/register">
-                  Зарегистрироваться
+                <a className="nav" href="/login">
+                  <span>Вход</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav" href="/register">
+                  <span>Зарегистрироваться</span>
                 </a>
               </li>
             </ul>

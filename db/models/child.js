@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Child extends Model {
     /**
@@ -16,13 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  Child.init({
-    login: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.ENUM('parent', 'child'),
-  }, {
-    sequelize,
-    modelName: 'Child',
-  });
+  Child.init(
+    {
+      login: DataTypes.STRING,
+      password: DataTypes.STRING,
+      role: DataTypes.ENUM('parent', 'child'),
+    },
+    {
+      sequelize,
+      modelName: 'Child',
+    }
+  );
   return Child;
 };
