@@ -21,12 +21,8 @@ function Home({ login, role }) {
               Чтобы поделиться вашей публикацией нужно перейти в раздел
               "Загрузить картинку"
             </p>
-            <div className="upload-btn">
-              <form
-                action="/upload"
-                method="post"
-                encType="multipart/form-data"
-              >
+            <div className="upload-form-container">
+              <form className="upload-form">
                 <label htmlFor="imageUpload">ЗАГРУЗИТЬ КАРТИНКУ</label>
                 <input
                   id="imageUpload"
@@ -34,7 +30,7 @@ function Home({ login, role }) {
                   type="file"
                   accept="image/*"
                 />
-                <button type="submit">Отправить</button>
+                <button className="upload-btn" type="button">Отправить</button>
               </form>
             </div>
 
@@ -48,6 +44,7 @@ function Home({ login, role }) {
           <h2>Авторизуйтесь, чтобы смотреть и добавлять картинки</h2>
         )}
       </div>
+      <script defer src="/js/uploadSuccess.js"></script>
     </Layout>
   );
 }
