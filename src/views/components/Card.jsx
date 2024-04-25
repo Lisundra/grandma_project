@@ -11,7 +11,7 @@ function Card({ entry }) {
           {entry.text}
         </div>
         <div className="sound-btn-container">
-          <button className="sound-btn" type="button">
+          <button className="sound-btn" type="button" data-text={entry.text}>
             ОЗВУЧИТЬ ТЕКСТ
           </button>
         </div>

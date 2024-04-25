@@ -13,12 +13,12 @@ homeRouter.get('/logout', (req, res) => {
 homeRouter.get('/', async (req, res) => {
   try {
     // console.log('+++++++++++++++ мы в этой ручке +++++++++++++++');
-    const { login } = req.session;
+    const { login, role } = req.session;
     const metaEntries = await Content.findAll({
       order: [['id', 'DESC']],
     });
     const entries = metaEntries.map((entry) => entry.get({ plain: true }));
-    renderTemplate(Home, { entries, login }, res);
+    renderTemplate(Home, { entries, login, role }, res);
   } catch (err) {
     console.error('Error on homeRouter.get() ====>>>>', err);
   }

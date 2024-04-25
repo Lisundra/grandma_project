@@ -10,9 +10,10 @@ function Home({ entries, login, role }) {
         <h1>Блог для бабушек и внуков</h1>
         {login ? (
           <>
-            <h2>Добро пожаловать, 
-            {login}
-            !
+            <h2>
+              Добро пожаловать,
+              {login}
+              !
             </h2>
             <h3>Инструкция:</h3>
             <p>
@@ -46,6 +47,7 @@ function Home({ entries, login, role }) {
         )}
       </div>
       <script defer src="/js/uploadSuccess.js" />
+      <script defer src="/js/sound.js" />
     </Layout>
   );
 }
