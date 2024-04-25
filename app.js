@@ -11,6 +11,7 @@ const { secureRoute, checkUser } = require('./src/middlewares/common');
 const regRouter = require('./src/routes/reg.router');
 const loginRouter = require('./src/routes/login.router');
 const homeRouter = require('./src/routes/homeRouter');
+const uploadRouter = require('./src/routes/upload.router');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(process.cwd(), 'public')));
 app.use('/register', secureRoute, regRouter);
 app.use('/login', secureRoute, loginRouter);
 app.use('/', homeRouter);
+app.use('/upload', uploadRouter);
 
 app.listen(PORT, function () {
   console.log(`Server listening at localhost:${this.address().port}`);
