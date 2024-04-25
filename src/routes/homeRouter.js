@@ -3,16 +3,6 @@ const renderTemplate = require('../utils/renderTemplate');
 const Home = require('../views/pages/Home');
 const { Content } = require('../../db/models');
 
-// homeRouter.get('/', (req, res) => {
-//   try {
-//     const { login } = req.session;
-//     renderTemplate(Home, { login }, res);
-//   } catch (err) {
-//     console.error('Ошибка при получении данных:', err);
-//     res.status(500).send('Ошибка на сервере');
-//   }
-// });
-
 homeRouter.get('/logout', (req, res) => {
   req.session.destroy(() => {
     res.clearCookie('cookieName');

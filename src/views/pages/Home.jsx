@@ -2,18 +2,17 @@ const React = require('react');
 const Layout = require('./Layout');
 const Card = require('../components/Card');
 
-function Home({ entries, login }) {
+function Home({ entries, login, role }) {
   // console.log(entries);
   return (
-    <Layout login={login}>
+    <Layout login={login} role={role}>
       <div className="main-container">
         <h1>Блог для бабушек и внуков</h1>
         {login ? (
           <>
-            <h2>
-              Добро пожаловать,
-              {login}
-              !
+            <h2>Добро пожаловать, 
+            {login}
+            !
             </h2>
             <h3>Инструкция:</h3>
             <p>
