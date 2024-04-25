@@ -6,8 +6,7 @@ module.exports = function Register() {
   return (
     <Layout>
       <h2>Заполните форму регистрации</h2>
-      <hr />
-      <form action="/register" method="POST" id="regForm">
+      <form action="/register" method="POST" id="regForm" className="regForm">
         <label htmlFor="inputLogin" className="form-label">
           Имя
         </label>
@@ -39,8 +38,7 @@ module.exports = function Register() {
           Зарегистрироваться
         </button>
       </form>
-      <hr />
-      <h3 className="regErrMsg"></h3>
+      <h3 className="regErrMsg" />
       <script defer src="/js/reg.js" />
     </Layout>
   );

@@ -6,8 +6,7 @@ module.exports = function Login() {
   return (
     <Layout>
       <h2 className="hTag">Войти</h2>
-      <hr />
-      <form action="/login" method="POST" id="loginForm">
+      <form action="/login" method="POST" id="loginForm" className="loginForm">
         <label htmlFor="inputLogin" className="form-label">
           Имя
         </label>
@@ -30,7 +29,6 @@ module.exports = function Login() {
           Войти
         </button>
       </form>
-      <hr />
       <script defer src="/js/login.js" />
     </Layout>
   );

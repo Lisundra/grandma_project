@@ -4,15 +4,14 @@ const renderTemplate = require('../utils/renderTemplate');
 
 const Register = require('../views/pages/Register');
 
-const { Parent, Child } = require('../../db/models');
+const { Parent, Child, ParentChild } = require('../../db/models');
 
 regRouter.get('/', (req, res) => {
   renderTemplate(Register, null, res);
 });
-
 regRouter.post('/', async (req, res) => {
   try {
-    const { login, password, role } = req.body;
+    const { login, password, role, grandmother } = req.body;
     const parentUser = await Parent.findOne({ where: { login } });
     const childrenUser = await Child.findOne({ where: { login } });
 
@@ -28,15 +27,30 @@ regRouter.post('/', async (req, res) => {
       req.session.login = newUser.login;
       req.session.userId = newUser.id;
       req.session.role = newUser.role;
-
-      req.session.save(() => {
-        res.json({
-          regDone: `Добро пожаловать, ${newUser.login}, ваша регистрация завершена`,
-        });
+    let newUser;
+    if (grandmother) {
+      const grandUser = await Parent.findOne({
+        where: { login: grandmother },
       });
-    } else {
+      if (grandUser) {
+        const hash = await bcrypt.hash(password, 10);
+        newUser = await Child.create({
+          login,
+          password: hash,
+          role,
+        });
+        await ParentChild.create({
+          parent_id: grandUser.id,
+          child_id: newUser.id,
+        });
+      } else {
+        return res.json({ err: 'Твоей бабушки тут нет)' });
+      }
+    }
+
+    if (role === 'parent') {
       const hash = await bcrypt.hash(password, 10);
-      const newUser = await Child.create({
+      newUser = await Parent.create({
         login,
         password: hash,
         role,
@@ -45,12 +59,11 @@ regRouter.post('/', async (req, res) => {
       req.session.userId = newUser.id;
       req.session.role = newUser.role;
 
-      req.session.save(() => {
-        res.json({
-          regDone: `Добро пожаловать, ${newUser.login}, ваша регистрация завершена`,
-        });
+    req.session.save(() => {
+      res.json({
+        regDone: `Добро пожаловать, ${newUser.login}, ваша регистрация завершена`,
       });
-    }
+    });
   } catch (error) {
     res.json({ err: error.message });
     console.error('ОШИБКА НА ЭТАПЕ РЕГИСТРАЦИИ>>>>', error);
