@@ -35,7 +35,7 @@ homeRouter.get('/grandmaCards', async (req, res) => {
       },
     });
     const cardsData = cards.map((card) => card.get({ plain: true }));
-    console.log(cardsData);
+    // console.log(cardsData);
     renderTemplate(GrandmaCards, { cardsData, login, role }, res);
   } catch (err) {
     console.error('Ошибка при получении данных:', err);

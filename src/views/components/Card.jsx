@@ -1,32 +1,34 @@
+
 const React = require('react');
 
-function Card({ card }) {
+function Card({ entry }) {
+
+  const speakText = (text) => {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ru-RU';
+    synth.speak(utterance);
+  };
+
   return (
     <div className="card-container">
-      <div className="owner">
-        {card.Parent.login}
-      </div>
       <div className="image-container">
-        <img
-          src="/image/61df2daf-0553-4907-a5b2-ba8478c8cd07.jpg"
-          alt={`Uploaded image: ${card.text}`}
-          style={{ width: '200px', height: 'auto' }}
-        />
+        <img src={entry.image_path} alt={Uploaded image: ${entry.text}} />
       </div>
-      {/* <div className="text-container">
-        <div className="text">
-          {card.text}
-        </div>
-      </div> */}
-      {/* <div className="text-btn">
-          <button type="button">
-              РАСПОЗНАТЬ ТЕКСТ
-          </button>
-          <button type="button">
+      <div className="text-block">
+        <div className="text-container">
+          <div className="text">
+            {entry.text}
+          </div>
+          <div className="sound-btn-container">
+            <button className="sound-btn" type="button" onClick={() => speakText(entry.text)}>
               ОЗВУЧИТЬ ТЕКСТ
-          </button>
-        </div> */}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+
   );
 }
 

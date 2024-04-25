@@ -1,7 +1,18 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+// +++ GOOGLE VISION
+const fs = require('fs');
+const { ImageAnnotatorClient } = require('@google-cloud/vision');
+// --- GOOGLE VISION
+
 const { Content } = require('../../db/models');
+
+// +++ GOOGLE VISION
+const visionClient = new ImageAnnotatorClient({
+  keyFilename: './sessions/clean-fin-421214-996478b047ba.json',
+});
+// --- GOOGLE VISION
 
 const storage = multer.diskStorage({
   destination(req, file, callback) {
@@ -20,11 +31,20 @@ const upload = multer({ storage });
 const uploadRouter = express.Router();
 
 uploadRouter.post('/', upload.single('image'), async (req, res) => {
-  console.log(req.file);
+  // console.log(req.savedImagePath);
   try {
     const parent_id = req.session.userId;
+
+    // +++ GOOGLE VISION
+    const imagePath = path.join('src', req.savedImagePath);
+    const image = await fs.promises.readFile(imagePath);
+    const [result] = await visionClient.textDetection(image);
+    const text = result.textAnnotations[0].description;
+    // --- GOOGLE VISION
+
     await Content.create({
       image_path: req.savedImagePath,
+      text,
       parent_id,
     });
 
