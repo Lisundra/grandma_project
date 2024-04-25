@@ -5,7 +5,7 @@ form.addEventListener('submit', async (e) => {
   const data = new FormData(form);
   const res = Object.fromEntries(data);
   if (!res.login || !res.password) {
-    alert('Введите  все данные для регистрации');
+    alert('Введите все данные для регистрации');
   } else {
     try {
       const response = await fetch('/register', {
@@ -22,7 +22,6 @@ form.addEventListener('submit', async (e) => {
         }, 200);
       }
       if (result.err) {
-        console.log(result.err);
         const errMsg = document.querySelector('.regErrMsg');
         errMsg.innerText = result.err;
       }
@@ -30,5 +29,34 @@ form.addEventListener('submit', async (e) => {
       console.log('Ошибка регистрации', error);
       alert('Ошибка регистрации');
     }
+  }
+});
+
+function addGrandmotherInput() {
+  const inputGrandmother = document.createElement('input');
+  inputGrandmother.name = 'grandmother';
+  inputGrandmother.type = 'text';
+  inputGrandmother.className = 'inputGrandmother';
+  inputGrandmother.id = 'inputGrandmother';
+  inputGrandmother.placeholder = 'Имя бабушки';
+
+  const selectRole = document.querySelector('.selectRole');
+  const parentLabel = selectRole.parentNode;
+  parentLabel.insertBefore(inputGrandmother, selectRole.nextSibling);
+}
+
+function removeGrandmotherInput() {
+  const inputGrandmother = document.querySelector('.inputGrandmother');
+  if (inputGrandmother) {
+    inputGrandmother.remove();
+  }
+}
+
+document.querySelector('.selectRole').addEventListener('change', (event) => {
+  const selectedRole = event.target.value;
+  if (selectedRole === 'child') {
+    addGrandmotherInput();
+  } else {
+    removeGrandmotherInput();
   }
 });
