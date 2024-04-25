@@ -1,4 +1,3 @@
-
 const React = require('react');
 
 function Card({ entry }) {
@@ -11,15 +10,8 @@ function Card({ entry }) {
         <div className="text-container">
           {entry.text}
         </div>
-        <div className="sound-btn-container">
-          <button className="sound-btn" type="button" data-text={entry.text}>
-            ОЗВУЧИТЬ ТЕКСТ
-          </button>
-        </div>
       </div>
     </div>
-
   );
 }
-
 module.exports = Card;
